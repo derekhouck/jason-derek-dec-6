@@ -21,19 +21,28 @@ function makeArr(num) {
   return arr;
 }
 
+
+
 function fizzArr(arr) {
-  return arr.map(num => fizzBuzz(num));
+  return arr.map(num => {
+    let fizzNum = fizzBuzz(num);
+    let extraClass = '';
+    console.log(typeof(fizzNum));
+    if (typeof(fizzNum) === 'string') {
+      extraClass = fizzNum;
+    }
+    return `<div class="fizz-buzz-item ${extraClass}"><span>${fizzBuzz(fizzNum)}</span></div>`;
+});
 }
 
 function main() {
   $('#number-chooser').on('submit', function() {
     event.preventDefault();
-    console.log('Form submitted');
+    let theEndNum = $('#number-choice').val();
+    let theNumList = makeArr(theEndNum);
+    let theFizzList = fizzArr(theNumList);
+    $('.js-results').html(theFizzList);
   });
-
-  makeArr(15);
-
-  console.log(fizzArr([1, 2, 3, 4, 5]));
 }
 
 $(main());
