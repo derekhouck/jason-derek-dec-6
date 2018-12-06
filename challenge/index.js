@@ -1,5 +1,12 @@
 'use strict';
 
+function checkItems () {
+  // if it has a class, removes
+  $(this).closest('li').find('.shopping-item').toggleClass('.shopping-item__checked');
+  
+  let closLi = $(this).closest('li').find('.shopping-item');
+  console.log(closLi);
+}
 
 
 function addItem(item) {
@@ -35,6 +42,8 @@ function main() {
   });
   $('#js-shopping-list-form').submit(submitItem);
 
+  $('.shopping-item-toggle').click(checkItems);
+  
     
 }
 $(main());
