@@ -2,10 +2,7 @@
 
 function checkItems () {
   // if it has a class, removes
-  $(this).closest('li').find('.shopping-item').toggleClass('.shopping-item__checked');
-  
-  let closLi = $(this).closest('li').find('.shopping-item');
-  console.log(closLi);
+  $(this).closest('li').find('.shopping-item').toggleClass('shopping-item__checked');
 }
 
 
@@ -30,6 +27,13 @@ function submitItem() {
   event.preventDefault();
   const item = $('.js-shopping-list-entry').val();
   $('.shopping-list').prepend(addItem(item));
+  $('.js-shopping-list-entry').val('');
+}
+
+function deleteItem() {
+  const item = $(this).closest('li');
+  $(item).remove();
+  return item;
 }
 
 function main() {
@@ -42,8 +46,9 @@ function main() {
   });
   $('#js-shopping-list-form').submit(submitItem);
 
-  $('.shopping-item-toggle').click(checkItems);
+  $('.shopping-list').on('click', '.shopping-item-toggle', checkItems);
   
+  $('.shopping-list').on('click', '.shopping-item-delete', deleteItem);
     
 }
 $(main());
